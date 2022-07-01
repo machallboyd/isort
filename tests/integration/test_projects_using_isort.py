@@ -101,13 +101,15 @@ def test_typeshed(tmpdir):
             "builtins.pyi",
             "--skip",
             "ast.pyi",
+            "--skip",
+            f"{tmpdir}/stdlib/venv/__init__.pyi",
         )
     )
 
 
 def test_pylint(tmpdir):
     git_clone("https://github.com/PyCQA/pylint.git", tmpdir)
-    run_isort([str(tmpdir)])
+    run_isort([str(tmpdir), "--skip", "bad.py"])
 
 
 def test_poetry(tmpdir):
